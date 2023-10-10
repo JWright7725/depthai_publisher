@@ -105,6 +105,7 @@ class DepthaiCamera():
         msg_out.frame_y = (detection.ymin + detection.ymax) / 2
 
         # Publish the target localisation message
+        rospy.loginfo('Data Published to ANL')
         self.pub_target_location.publish(msg_out)
 
 
@@ -204,9 +205,10 @@ class DepthaiCamera():
                         # print("{},{},{},{},{},{},{}".format(detection.label,labels[detection.label],detection.confidence,detection.xmin, detection.ymin, detection.xmax, detection.ymax))
                         
                         ####### Liv added:
-                        rospy.loginfo("Object detected, Label: {}, Confidence: {}, Xmin: {}, Ymin: {}, Xmax: {}, Ymax: {}".format(labels[detection.label],detection.confidence,detection.xmin, detection.ymin, detection.xmax, detection.ymax))
-
+                        #rospy.loginfo("Object detected, Label: {}, Confidence: {}, Xmin: {}, Ymin: {}, Xmax: {}, Ymax: {}".format(labels[detection.label],detection.confidence,detection.xmin, detection.ymin, detection.xmax, detection.ymax))
+                        rospy.loginfo(f'{labels[detection.label]} detected with {detection.confidence * 100}% confidence')
                         if detection.confidence > self.confidence_threshold:
+                            rospy.loginfo('Publishing location data to ANL')
                             self.target_localisation(detection)
                     
                         found_classes.append(detection.label)
