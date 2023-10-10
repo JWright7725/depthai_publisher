@@ -79,7 +79,7 @@ class DepthaiCamera():
         self.pub_image_detect = rospy.Publisher(self.pub_topic_detect, CompressedImage, queue_size=10)
 
         # Add a Publisher for the ArucoLocalisation Message
-        self.pub_target_location= rospy.Publisher("/target", ArucoLocalisation, queue_size=10)
+        self.pub_target_location= rospy.Publisher("/depthai_node/target_localisation", ArucoLocalisation, queue_size=10)
         # Add a value for the confidence threshold for target detection
         self.confidence_threshold = 0.75
 
